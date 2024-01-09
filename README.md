@@ -9,5 +9,5 @@ I completed the following projects:
 - COMMERCE & AUCTION
 - SOCIAL MEDIA
 - CODING CENTER (FINAL PROJECT)
-- 
+  
 This was one of the most engaging and fruitful classes I have taken at HES! 
