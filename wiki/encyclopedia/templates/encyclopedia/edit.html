@@ -1,0 +1,16 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <form action="{% url 'save' %}" method="POST">
+        {% csrf_token %}
+        <label for="content" name="label">Content</label>
+        <br>
+        <textarea name="content" id="content">{{ markdown_content }}</textarea>
+        <br>
+        <input type="submit" value="Save">
+    </form>
+{% endblock %}

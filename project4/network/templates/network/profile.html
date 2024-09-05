@@ -1,0 +1,25 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated and profile_user != user %}
+        <form action="{% url 'follow' profile_user.id %}" method="POST">
+            {% csrf_token %}
+            {% if profile_user not in user.following.all %}
+                <input type="submit" value="Follow"> <br>
+            {% else %}
+                <input type="submit" value="Unfollow"> <br>
+            {% endif %}
+        </form>
+    {% endif %}
+    {{ profile_user.followers.all.count }} followers <br>
+    {{ profile_user.following.all.count }} following <br>
+    {{ profile_user }}'s posts: <br>
+    {% for post in profile_user.posts.all %}
+        {{ post }}
+        <br>
+    {% endfor %}
+    
+    <script src="{% static 'network/script.js' %}"></script>
+{% endblock %}

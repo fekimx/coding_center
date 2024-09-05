@@ -1,0 +1,37 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <h3>Active Listings</h3>
+    <hr>
+    {% for item in listings %}
+        <!-- This is to make sure the winner can still see the item even if it is closed. -->
+        {% if item.status == False and item.winner == user %}
+            Action has closed and you are the winner!
+            <a href="{% url 'listing' item.id %}">{{ item.title }}</a>
+            <hr>
+        {% elif item.status %}
+            <div>
+                in <a href="{% url 'category' item.category %}">{{ item.category }}</a> 
+                <a href="{% url 'listing' item.id %}">
+                    {% if item.image != "" %}
+                        <br>
+                        <img src="{{ item.image }}" alt="image of the item"> 
+                    {% endif %}
+                    <br>
+                    Item: {{ item.title }}
+                </a>
+                <br>
+                Description: {{ item.description }}
+                <br>
+                Current Price: {{ item.getCurrentPrice }}
+                <br>
+                {% if item.owner == user %}
+                    Owner: you
+                {% else %}
+                    Owner: {{ item.owner.username }}
+                {% endif %}
+            </div>
+        <hr>    
+        {% endif %}
+    {% endfor %}
+{% endblock %}

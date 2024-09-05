@@ -1,0 +1,72 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    <!-- If user is authenticated, then display the textara and submit button to add a new post -->
+    {% if user.is_authenticated %}
+        <strong>New Post</strong>
+        <form action="{% url 'post' %}" method="POST">
+            {% csrf_token %}
+            {{ post_form }}
+            <br>
+            <input type="submit" value="Post">
+        </form>
+    {% endif %}
+    <strong>Posts</strong>
+    <br>
+    <!-- List all the posts with the author's username, Edit button if owns the post, 
+        post itself, date&time and Like button if authenticated, and the number of likes, RESPECTIVELY -->
+    <div id="post-view"></div>
+
+    {% for post in page %}
+      <div>
+        <a href="{% url 'profile' post.author.id %}">{{ post.author.username }}</a>  <br>
+        
+        {% if user == post.author %}
+            <button class="edit-btn" data-post="{{ post.id }}">Edit</button> <br>
+        {% endif %}
+        
+        <div class="content" data-post="{{ post.id }}">{{ post.post }}</div>  
+       
+        <!-- The part that has the textarea and the save button, hidden by default -->    
+        <div class="update" data-post="{{ post.id }}" style="display:none">
+            <textarea class="textarea" data-post="{{ post.id }}" name="edited-post" cols="10" rows="10"></textarea>
+            <input type="submit" value="Save" class="save-btn" data-post="{{ post.id }}">
+        </div>
+
+        {{ post.date_time_posted }} <br>
+        
+        {% if user.is_authenticated %}
+          <button class="like-btn" data-post="{{ post.id }}">Like</button> <br>
+        {% endif %}
+        
+        <label class="like-label" data-post="{{ post.id }}">{{ post.likers.all.count }}</label>
+        
+        <hr>
+      </div>
+    {% endfor %}
+
+    <!-- pagination  -->
+    <nav aria-label="...">
+      <ul class="pagination">
+        {% if page.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a>
+          </li>
+        {% endif %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">
+            {{ page.number}}
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+        {% if page.has_next %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{ page.next_page_number }}">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <script src="{% static 'network/script.js' %}"></script>
+{% endblock %}

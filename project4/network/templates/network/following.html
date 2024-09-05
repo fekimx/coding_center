@@ -1,0 +1,51 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    {% for post in page %}
+      <!-- Filter the posts by showing the post that the user follows and 
+        list just like in index.html but eliminate the edit button because one cannot follow self-->
+      {% if post.author in user.following.all %}
+        <div>
+          <a href="{% url 'profile' post.author.id %}">{{ post.author.username }}</a>  <br>
+          
+          <div class="content" data-post="{{ post.id }}">{{ post.post }}</div>  
+        
+          {{ post.date_time_posted }} <br>
+          
+          {% if user.is_authenticated %}
+            <button class="like-btn" data-post="{{ post.id }}">Like</button> <br>
+          {% endif %}
+          
+          <label class="like-label" data-post="{{ post.id }}">{{ post.likers.all.count }}</label>
+        
+          <hr>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+    <!-- pagination  -->
+    <nav aria-label="...">
+      <ul class="pagination">
+        {% if page.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page.previous_page_number }}">Previous</a>
+          </li>
+        {% endif %}
+        <li class="page-item active" aria-current="page">
+          <span class="page-link">
+            {{ page.number}}
+            <span class="sr-only">(current)</span>
+          </span>
+        </li>
+        {% if page.has_next %}
+          <li class="page-item">
+              <a class="page-link" href="?page={{ page.next_page_number }}">Next</a>
+          </li>
+        {% endif %}
+      </ul>
+    </nav>
+    <script src="{% static 'network/script.js' %}"></script>
+
+{% endblock %}

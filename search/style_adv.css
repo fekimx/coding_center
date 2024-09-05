@@ -1,0 +1,94 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: Roboto, Arial, sans-serif;
+  color: #222;
+}
+/*google.com/advanced_search has Google logo in the upper left corner and it takes you to the main page. I added it to make it just like the original.*/
+.adv_img {
+  width: 75px;
+  margin: 20px 0 45px 10px;
+}
+/*The text Search that's taken off because Google Advanced Search page has the logo, not the text. I still wrote the code for the text:)*/
+#search_right {
+  float: right;
+  margin-right: 20px;
+  margin-top: 20px;
+}
+a {
+  text-decoration: none;
+  color: #222;
+  margin: 10px;
+}
+a:hover {
+  text-decoration: underline;
+}
+/*To style "Advanced Search" text*/
+#adv_label {
+  color: #d93025;  
+  font-size: 20px;  
+  margin: 65px 0 0 45px;
+}
+/*This is for the form elements (label and input)*/
+#adv_search {
+  max-width: 1140px;
+  min-width: 200px;
+  width: 70%;
+  margin-top: 40px;
+  margin-left: 45px;
+}
+hr {
+  height: 1px;
+  margin-top: 30px;
+  background-color: #dadce0;
+  border: none;
+}
+/*label and textfield*/
+.form {
+  clear: both;
+  margin-top: 10px;
+  min-width: 167px;
+  min-height: 41px;
+  vertical-align: middle;
+  padding-right: 10px;
+}
+/*excludes the red Advanced Search label/text*/
+label:not(#adv_label) {
+  float: left;
+  min-width: 167px;
+  width: 20%;
+  height: 42px;
+  color: #222;
+  font-size: 13px;
+  line-height: 16px;
+  vertical-align: middle;
+}
+input[type=text]{
+  border-radius: 1px;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  font-size: 13px;
+  height: 25px;
+  width: 60%;
+  max-width: 550px;
+  padding: 1px 8px;
+  display: flex;
+}
+#adv_button {
+  border: 1px solid #3079ed;
+  color: #fff;
+  background-color: #4d90fe;
+  border-radius: 2px;
+  cursor: default;
+  font-size: 11px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 100%;
+  height: 30px;
+  min-width: 120px;
+  float: right;
+}
+#adv {
+  padding-right: 15%;
+}

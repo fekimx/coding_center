@@ -1,0 +1,110 @@
+/*to clear default styling across browsers and
+to be consistent with font size, style, and color across the page*/
+* {
+  margin: 0;
+  padding: 0;
+  font-size: 14px;
+  font-family: Roboto, Arial, sans-serif;
+  color: #222;
+}
+/*to put Search text on upper right in image search*/
+#search_right {
+  text-align: right;
+  margin: 20px;
+}
+/*Below two are to clear text-decor and underline it only when you hover over just like Google's page*/
+a {
+  text-decoration: none;
+  color: #222;
+  margin: 10px;
+}
+a:hover {
+  text-decoration: underline;
+}
+/*this is to place the logo*/
+img {
+  width: 272px;
+  display: block;
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 30px;
+}
+/*This is for the blue image text right underneath Google's logo but to my suprise they had a fixed position for the text and flex is not used like on the main page*/
+#img_span {
+  color: #4285f4;
+  position: relative;
+  left: 58%;
+}
+/*Logo and image text on the image search page*/
+#search_right {
+  min-width: 925px;
+}
+/*This has the magnifier and the textfield in a div tag and div is styled*/
+#searchbar {
+  width: auto;
+  height: 40px;
+  max-width: 584px;
+  margin: 0 auto;
+  margin-bottom: 40px;
+  padding-left: 20px;
+  background: #fff;
+  display: flex;
+  flex: 100%;
+  border: 1px solid #dfe1e5;
+  box-shadow: none;
+  border-radius: 24px;
+  z-index: 3;
+}
+#searchbar:hover {
+  box-shadow: 0px 2px 12px -5px #5B5B5B;;
+}
+/*magnifier*/
+.icon {
+  margin: auto;
+  width: 20px;
+  height: 20px;
+}
+/*Searchbar styling, most are taken from Google's original styling*/
+input[type=text] {
+  width: 100%;
+  height: 36px;
+  max-width: 584px;
+  margin: 0 auto;
+  padding-left: 5px;
+  margin-right: 15px;
+  display: flex;
+  flex: 100%;
+  border: 1px solid transparent;
+  z-index: 3;
+}
+input[type=text]:focus {
+  outline: none;
+}
+/*For the Google Search button*/
+input[type="submit"] {
+  width: auto;
+  max-width: 584px;
+  margin: 0 auto;
+  display: block;
+  background-color: #f8f9fa;
+  border: 1px solid #f8f9fa;
+  border-radius: 4px;
+  color: #3c4043;
+  padding: 0 16px;
+  line-height: 27px;
+  height: 36px;
+  min-width: 54px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+}
+input[type="submit"]:hover {
+  box-shadow: 0 1px 1px rgba(0,0,0,.1);
+  background-color: #f8f9fa;
+  border: 1px solid #dadce0;
+  color: #202124;
+}
+input[type="submit"]:focus {
+  box-shadow: #dadce0;
+  outline: none;
+}

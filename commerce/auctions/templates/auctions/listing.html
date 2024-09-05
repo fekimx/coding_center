@@ -1,0 +1,88 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    <!-- Details about the item -->
+    <h3>Item: {{ item.title }}</h3>
+    in <a href="{% url 'category' item.category %}">{{ item.category }}</a>
+    <br>
+    {% if user.is_authenticated %}
+        <form action="{% url 'watchlist' item.id %}" method="POST">
+            {% csrf_token %}
+            <!-- This alternates the text on the button (add or remove) depending on if it is on the list or not -->
+            {% if item not in userswatchlist %}
+                <input type="submit" value="Add to watchlist">
+            {% else %}
+                <input type="submit" value="Remove from watchlist"> 
+            {% endif %}
+        </form>
+    {% endif %}
+    {% if item.image != "" %}
+        <img src="{{ item.image }}" alt="image of the item">
+    {% endif %}
+    <br>
+    Description: {{ item.description }}
+    <br>
+    Starting Bid: {{ item.starting_price }} || 
+    Current Price: {{ item.getCurrentPrice }}
+    <br>
+    <!-- For user to know which items they added -->
+    {% if item.owner == user %}
+        Owner: you
+    {% else %}
+        Owner: {{ item.owner.username }}
+    {% endif %}
+    <br>
+    <br>
+    {% if user.is_authenticated %}
+        {% if item.status %}
+            {% if item.bids.count == 0 or item.bids.count == 1 %}
+                There is {{ item.bids.count }} bid so far. 
+            {% else %}
+                There are {{ item.bids.count }} bids so far.
+            {% endif %}
+            {% if item.winner == user %}
+                Your bid is the current bid.
+            {% endif %}
+            <form action="{% url 'bid' item.id %}" method="POST">
+                {% csrf_token %}
+                {{ bid_form }}
+                <br>
+                <input type="submit">
+            </form>
+        {% elif item.winner == user %}
+            Auction has ended. Congrats, you won this auction!
+        {% endif %}
+
+    {% endif %}
+    <br>
+    <!-- Show [close auction] only when the user is autenticated & the owner and the item is still active-->
+    {% if user.is_authenticated and user == item.owner and item.status == True %}
+        [<a href="{% url 'close' item.id %}">Close Auction</a>]
+    {% endif %}
+    <br>
+    <br>
+    <strong style="color: blue"><em>Comments</em></strong>
+    <br>
+    <!-- List all the comments with the date&time and the author -->
+    {% for comment in comments %}
+        <strong style="padding-left: 50px">Comment: </strong> {{ comment.comment }} <br>
+        <strong style="padding-left: 50px">Posted on: </strong> {{ comment.date_time_posted }} <br>
+        <strong style="padding-left: 50px">Posted by: </strong> {{ comment.author.username }} <br>
+        <br>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+        <strong><em>Leave a comment:</em></strong>
+        <form action="{% url 'comment' item.id %}" method="POST">
+            {% csrf_token %}
+            {{ comment_form }}
+            <br>
+            <input type="submit">
+        </form>
+    <a href="{% url 'index' %}">Back to main page</a>
+    <br>
+    <a href="{% url 'viewwatchlist' %}">Back to my watchlists</a>
+    {% endif %}
+{% endblock %}

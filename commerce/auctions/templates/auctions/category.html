@@ -1,0 +1,18 @@
+{% extends "auctions/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+    <h3>Notification</h3>
+    <ul>
+        <!-- If the user clicks on a certain category, it iterates all the listings and 
+        displays all the items that are in that category. -->
+        {% for item in listings %}
+            {% if item.category == category %}
+                <a href="{% url 'listing' item.id %}"><li>{{ item }}</li></a> 
+            {% endif %}
+        {% endfor %}
+    </ul>
+    <hr>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Encyclopedia
+{% endblock %}
+
+{% block body %}
+    <h3>This is what I found:</h3>
+    <ul>
+        {% for r in results %}
+            <a href='{% url 'entry' r %}'> <li>{{ r }}</li> </a>
+        {% endfor %}
+    </ul>    
+{% endblock %}

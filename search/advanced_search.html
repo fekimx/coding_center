@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Advanced Search</title>
+    <link href="style_adv.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <!-- Google's Advanced Search doesn't have a Search text, it has the logo that takes to the main page. I added both. -->
+    <div>
+      <a href="index.html" > 
+        <img class="adv_img" src="images/googlelogo.png" alt="logo" title="Go to Google Home">
+      </a>
+      <div id="search_right">
+        <a href="index.html">Search</a>
+      </div>
+    </div>
+    
+    <form action="https://www.google.com/search" name="f" method="GET">
+      <label id="adv_label">Advanced Search</label>
+      <hr>
+      <div id="adv_search">
+        <div style="margin-bottom:20px"> 
+          <span style="font-size:16px">Find pages with...</span>
+        </div>
+        
+        <div class="form">
+          <label for="all">all these words:</label>
+          <input type="text" id="all" name="as_q">
+        </div>
+
+        <div class="form">
+          <label for="exact">this exact word or phrase:</label>
+          <input type="text" id="exact" name="as_epq">
+        </div>
+
+        <div class="form">
+          <label for="any">any of these words:</label>
+          <input type="text" id="any" name="as_oq">
+        </div>
+        
+        <div class="form">
+          <label for="none">none of these words:</label>
+          <input type="text" id="none" name="as_eq">
+        </div>
+        <div id="adv">
+          <input type="submit" id="adv_button" value="Advanced Search">
+        </div>
+        
+      </div>
+      <hr style="margin-top: 50px">
+    </form>
+  </body>
+</html>
